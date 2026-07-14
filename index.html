@@ -330,7 +330,7 @@
 
 <script>
 // ====== הגדרות (למלא לפני שימוש) ======
-const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxcclnw1-8haLbepKYHmfu7OdWU6HWdsF-wSAWh6NcpfrLTRLhpB16bS5NqUsyueByD-Q/exec";
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxVwVroBWIMEbV4d12nh_3C6CQsXFjZA2JqUNAnn7c_bPMB58nijph3j1hiRI5oygex/exec";
 const FOLDER_ID = "1CBUGGAQaV-KgbXsFwWvURNTBrG4frceq"; // תיקיית "קבלת חומרי גלם" בחשבון ibatsekim
 // =======================================
 
@@ -519,11 +519,12 @@ document.getElementById("sendBtn").addEventListener("click", ()=>{
   fetch(WEBHOOK_URL, {
     method: "POST",
     mode: "no-cors",
-    headers: {"Content-Type":"application/json"},
+    headers: {"Content-Type":"text/plain;charset=utf-8"},
     body: JSON.stringify({
-      folderId: FOLDER_ID,
-      fileName: fileName,
-      fileData: base64
+      base64: base64,
+      mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      filename: fileName,
+      folderId: FOLDER_ID
     })
   }).then(()=>{
     // no-cors לא מחזיר תשובה קריאה - יש לבדוק ב-Executions log של ה-Apps Script
